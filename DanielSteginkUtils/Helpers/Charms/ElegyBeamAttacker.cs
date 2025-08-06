@@ -96,7 +96,7 @@ namespace DanielSteginkUtils.Helpers.Charms
                         break;
                 }
 
-                if (PlayerData.instance.equippedCharm_13)
+                if (PlayerData.instance.GetBool("equippedCharm_13"))
                 {
                     grubberFlyBeam.transform.SetScaleY(grubberFlyBeam.transform.localScale.y * markOfPrideModifier);
                 }

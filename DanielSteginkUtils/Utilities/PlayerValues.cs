@@ -15,7 +15,7 @@ namespace DanielSteginkUtils.Utilities
         public static int MaxSoul(bool getCurrentMax)
         {
             // If the player has died, their max MP will be reduced
-            if (PlayerData.instance.soulLimited)
+            if (PlayerData.instance.GetBool("soulLimited"))
             {
                 return 66;
             }
@@ -27,10 +27,10 @@ namespace DanielSteginkUtils.Utilities
             }
 
             // Max MP the player has by default
-            int regularMax = PlayerData.instance.maxMP;
+            int regularMax = PlayerData.instance.GetInt("maxMP");
 
             // Max MP from the Soul Vessels
-            int vesselMax = PlayerData.instance.MPReserveMax;
+            int vesselMax = PlayerData.instance.GetInt("MPReserveMax");
 
             return regularMax + vesselMax;
         }
@@ -41,8 +41,8 @@ namespace DanielSteginkUtils.Utilities
         /// <returns></returns>
         public static int CurrentSoul()
         {
-            int currentMp = PlayerData.instance.MPCharge;
-            int reserveMp = PlayerData.instance.MPReserve;
+            int currentMp = PlayerData.instance.GetInt("MPCharge");
+            int reserveMp = PlayerData.instance.GetInt("MPReserve");
             return currentMp + reserveMp;
         }
 
@@ -55,7 +55,7 @@ namespace DanielSteginkUtils.Utilities
         {
             // The player can only spend the SOUL in their big orb on spells
             // Soul in the Soul Vessels is considered reserve and cannot be used
-            return Math.Min(amount, PlayerData.instance.MPCharge);
+            return Math.Min(amount, PlayerData.instance.GetInt("MPCharge"));
         }
 
         /// <summary>
@@ -64,19 +64,19 @@ namespace DanielSteginkUtils.Utilities
         /// <returns></returns>
         public static bool BoughtAllMaps()
         {
-            return PlayerData.instance.mapCrossroads &&
-                    PlayerData.instance.mapGreenpath &&
-                    PlayerData.instance.mapFogCanyon &&
-                    PlayerData.instance.mapRoyalGardens &&
-                    PlayerData.instance.mapFungalWastes &&
-                    PlayerData.instance.mapCity &&
-                    PlayerData.instance.mapWaterways &&
-                    PlayerData.instance.mapMines &&
-                    PlayerData.instance.mapDeepnest &&
-                    PlayerData.instance.mapCliffs &&
-                    PlayerData.instance.mapOutskirts &&
-                    PlayerData.instance.mapRestingGrounds &&
-                    PlayerData.instance.mapAbyss;
+            return PlayerData.instance.GetBool("mapCrossroads") &&
+                    PlayerData.instance.GetBool("mapGreenpath") &&
+                    PlayerData.instance.GetBool("mapFogCanyon") &&
+                    PlayerData.instance.GetBool("mapRoyalGardens") &&
+                    PlayerData.instance.GetBool("mapFungalWastes") &&
+                    PlayerData.instance.GetBool("mapCity") &&
+                    PlayerData.instance.GetBool("mapWaterways") &&
+                    PlayerData.instance.GetBool("mapMines") &&
+                    PlayerData.instance.GetBool("mapDeepnest") &&
+                    PlayerData.instance.GetBool("mapCliffs") &&
+                    PlayerData.instance.GetBool("mapOutskirts") &&
+                    PlayerData.instance.GetBool("mapRestingGrounds") &&
+                    PlayerData.instance.GetBool("mapAbyss");
         }
     }
 }

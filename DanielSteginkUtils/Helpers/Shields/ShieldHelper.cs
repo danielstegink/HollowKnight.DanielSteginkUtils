@@ -118,7 +118,7 @@ namespace DanielSteginkUtils.Helpers.Shields
             // Hero Controller handles I-Frames normally, so we can use its variables
             // Of course, we need to check for Stalwart Shell as well
             float iFramesLength = HeroController.instance.INVUL_TIME;
-            if (PlayerData.instance.equippedCharm_4)
+            if (PlayerData.instance.GetBool("equippedCharm_4"))
             {
                 iFramesLength = HeroController.instance.INVUL_TIME_STAL;
             }

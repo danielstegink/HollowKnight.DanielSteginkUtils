@@ -50,10 +50,10 @@ namespace DanielSteginkUtils.Helpers.Attributes
                 self.SetMantis(true);
 
                 // If MOP isn't equipped, we need to adjust the vector to offset the boost NailSlash gives by default
-                if (!PlayerData.instance.equippedCharm_13)
+                if (!PlayerData.instance.GetBool("equippedCharm_13"))
                 {
                     float resetModifier = 1f;
-                    if (PlayerData.instance.equippedCharm_18)
+                    if (PlayerData.instance.GetBool("equippedCharm_18"))
                     {
                         // If Longnail is equipped, we need to offset the 40% boost to be 15% instead
                         resetModifier = 1.15f / 1.4f;

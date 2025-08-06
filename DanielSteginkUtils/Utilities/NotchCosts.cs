@@ -220,7 +220,7 @@
 
             // But Sharp Shadow buffs DDash to deal nail damage for 2 notches, 
             // so logically 1 notch is worth 1/2 nail damage.
-            float ssBonus = PlayerData.instance.nailDamage;
+            float ssBonus = PlayerData.instance.GetInt("nailDamage");
             return ssBonus / 2;
         }
 

@@ -19,7 +19,7 @@ namespace DanielSteginkUtils
         /// Hopefully this number doesn't change too often.
         /// </summary>
         /// <returns></returns>
-        public override string GetVersion() => "1.0.0.0";
+        public override string GetVersion() => "1.0.1.0";
 
         /// <summary>
         /// Initialization step. Fairly useless here, but vital in most mods.

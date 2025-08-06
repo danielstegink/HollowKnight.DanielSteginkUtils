@@ -84,7 +84,7 @@ namespace DanielSteginkUtils.Utilities
                     }
                 }
                 else if (HeroController.instance.cState.invulnerable ||
-                            PlayerData.instance.isInvincible)
+                            PlayerData.instance.GetBool("isInvincible"))
                 {
                     canTakeDamage = false;
                 }

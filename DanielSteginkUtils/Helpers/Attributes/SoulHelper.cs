@@ -14,12 +14,12 @@ namespace DanielSteginkUtils.Helpers.Libraries
         /// <param name="performLogging"></param>
         public static void GainSoul(int amount, bool performLogging = false)
         {
-            int reserve = PlayerData.instance.MPReserve;
+            int reserve = PlayerData.instance.GetInt("MPReserve");
             PlayerData.instance.AddMPCharge(amount);
 
             // Sends FSM events so UI updates
             GameCameras.instance.soulOrbFSM.SendEvent("MP GAIN");
-            if (PlayerData.instance.MPReserve != reserve)
+            if (PlayerData.instance.GetInt("MPReserve") != reserve)
             {
                 GameManager.instance.soulVessel_fsm.SendEvent("MP RESERVE UP");
             }

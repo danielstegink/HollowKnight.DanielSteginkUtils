@@ -97,7 +97,7 @@ namespace DanielSteginkUtils.Helpers.Attributes
             while (isUnnActive)
             {
                 // We only need to apply it if we're healing and SOU is equipped
-                if (PlayerData.instance.equippedCharm_28 &&
+                if (PlayerData.instance.GetBool("equippedCharm_28") &&
                     HeroController.instance.cState.focusing)
                 {
                     Rigidbody2D rb2d = ClassIntegrations.GetField<HeroController, Rigidbody2D>(HeroController.instance, "rb2d");

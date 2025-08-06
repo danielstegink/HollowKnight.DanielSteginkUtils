@@ -1,5 +1,4 @@
 ﻿using SFCore;
-using SFCore.Generics;
 using System.Linq;
 
 namespace DanielSteginkUtils.Helpers.Charms
@@ -15,7 +14,7 @@ namespace DanielSteginkUtils.Helpers.Charms
         /// <param name="charmNames"></param>
         public static int GetCharmId(string[] charmNames)
         {
-            int customCharmCount = FullSettingsMod<SFCoreSaveSettings, SFCoreGlobalSettings>.GlobalSettings.MaxCustomCharms;
+            int customCharmCount = SFCoreMod.GlobalSettings.MaxCustomCharms;
             for (int i = 41; i <= 40 + customCharmCount; i++)
             {
                 string charmName = Language.Language.Get($"CHARM_NAME_{i}", "UI");

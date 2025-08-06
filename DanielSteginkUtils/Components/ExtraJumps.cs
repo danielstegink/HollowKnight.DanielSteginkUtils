@@ -66,7 +66,7 @@ namespace DanielSteginkUtils.Components
                             !self.cState.bouncing &&
                             !self.cState.shroomBouncing &&
                             !self.cState.onGround;
-            return PlayerData.instance.hasDoubleJump &&
+            return PlayerData.instance.GetBool("hasDoubleJump") &&
                     !self.controlReqlinquished &&
                     !landedStates.Contains(self.hero_state) &&
                     inAir &&

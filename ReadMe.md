@@ -54,3 +54,8 @@ General structure:
 	- Logic - Determines logic results such as if an object is a nail attack or if the player can take damage
 	- NotchCosts - Calculates the value of various properties and modifiers in terms of charm notches
 	- PlayerValues - Gets properties related to the player, such as how much SOUL the player has collected
+
+## Patch Notes
+1.0.1.0
+- Replaced references to PlayerData with calls to GetBool and GetInt
+- Simplified code in GetModCharmHelper
