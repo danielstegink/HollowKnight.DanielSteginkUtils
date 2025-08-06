@@ -55,6 +55,9 @@ General structure:
 	- NotchCosts - Calculates the value of various properties and modifiers in terms of charm notches
 	- PlayerValues - Gets properties related to the player, such as how much SOUL the player has collected
 
+## Thanks
+Thank you to SFGrenade, Roma 337 and Spamtom F. Gambleton for testing and feedback.
+
 ## Patch Notes
 1.0.1.0
 - Replaced references to PlayerData with calls to GetBool and GetInt
