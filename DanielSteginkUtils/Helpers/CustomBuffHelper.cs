@@ -1,4 +1,4 @@
-﻿using DanielSteginkUtils.Components.Template;
+﻿using DanielSteginkUtils.Components;
 using DanielSteginkUtils.Utilities;
 using Modding.Utils;
 using System.Collections;

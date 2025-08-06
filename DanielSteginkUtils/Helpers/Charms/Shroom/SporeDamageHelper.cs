@@ -3,26 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace DanielSteginkUtils.Helpers.Charms.Spores
+namespace DanielSteginkUtils.Helpers.Charms.Shroom
 {
     /// <summary>
     /// Spore Shroom clouds, like Dung clouds, are recycled in a confusing way so that 
-    /// buffing a cloud only once is tricky. So here we are.
+    /// buffing a cloud only once is tricky. So here we 
     /// </summary>
-    public class SporeSizeHelper : CustomBuffHelper<BuffSporeSize, Vector3>
+    public class SporeDamageHelper : CustomBuffHelper<BuffDungDamage, float>
     {
         /// <summary>
-        /// Helper for adjusting the size of clouds created by Spore Shroom
+        /// Helper for adjusting the damage of clouds created by Spore Shroom
         /// </summary>
         /// <param name="modName"></param>
         /// <param name="featureName"></param>
         /// <param name="modifier"></param>
         /// <param name="performLogging"></param>
-        public SporeSizeHelper(string modName, string featureName, float modifier, bool performLogging = false) : 
+        public SporeDamageHelper(string modName, string featureName, float modifier, bool performLogging = false) : 
                 base(modName, featureName, modifier, performLogging) { }
 
         /// <summary>
-        /// Gets spore clouds
+        /// Gets all spore clouds
         /// </summary>
         /// <returns></returns>
         public override List<GameObject> GetObjects()
@@ -33,23 +33,25 @@ namespace DanielSteginkUtils.Helpers.Charms.Spores
         }
 
         /// <summary>
-        /// Gets current size of the cloud
+        /// Gets damage rate of the cloud
         /// </summary>
         /// <param name="gameObject"></param>
         /// <returns></returns>
-        public override Vector3 GetCurrentValue(GameObject gameObject)
+        public override float GetCurrentValue(GameObject gameObject)
         {
-            return gameObject.transform.localScale;
+            DamageEffectTicker damageEffectTicker = gameObject.GetComponent<DamageEffectTicker>();
+            return damageEffectTicker.damageInterval;
         }
 
         /// <summary>
-        /// Applies the modifiers to the size dimensions
+        /// Applies the modifiers to the damage rate
         /// </summary>
         /// <param name="gameObject"></param>
         /// <param name="modsApplied"></param>
-        public override void ApplyBuff(GameObject gameObject, BuffSporeSize modsApplied)
+        public override void ApplyBuff(GameObject gameObject, BuffDungDamage modsApplied)
         {
-            gameObject.transform.localScale = modsApplied.GetModdedValue();
+            DamageEffectTicker damageEffectTicker = gameObject.GetComponent<DamageEffectTicker>();
+            damageEffectTicker.SetDamageInterval(modsApplied.GetModdedValue());
         }
     }
 }

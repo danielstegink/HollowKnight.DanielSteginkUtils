@@ -1,3 +1,56 @@
 # DanielSteginkUtils
 
 A code library containing various helper classes, balance calculations, and logic I've accumulated in my modding journey.
+
+General structure:
+- Components - Custom components that combine with Helpers to modify certain properties
+	- Dung
+		- BuffDungDamage - Modifies damage rate of Defender's Crest
+		- BuffDungFluke - Modifies damage rate of Defender's Crest + Flukenest
+		- BuffDungSize - Modifies size of Defender's Crest
+	- Shroom
+		- BuffSporeDamage - Modifies damage rate of Spore SHroom
+		- BuffSporeSize - Modifies size of Spore Shroom
+	- ExtraJumps - Modifies number of jumps received from Monarch Wings
+	- ModBuffs - Template for custom components
+- Helpers - Helper objects for modifying various properties
+	- Abilities
+		- DashHelper - Modifies cooldowns of Mothwing Cloak and Shade Cloak
+		- JumpHelper - Modifies number of jumps received from Monarch Wings
+	- Attributes
+		- DamageHelper - Creates a HitInstance to deal damage to an enemy
+		- GeoHelper - Modifies Geo gained from all sources
+		- HealHelper - Adds a chance to get an additional Mask when healing
+		- HealingSpeedHelper - Modifies the time required to heal
+		- NailRangeHelper - Modifies the range of nail attacks
+		- SoulHelper - Gives extra SOUL to the player without triggering related events
+		- SpeedHelper - Modifies movement speed
+		- StaggerHelper - Modifies the number of hits required to stagger a boss
+	- Charms
+		- Dung
+			- DungDamageHelper - Modifies damage rate of Defender's Crest
+			- DungFlukeHelper - Modifies damage rate of Defender's Crest + Flukenest
+			- DungSizeHelper - Modifies size of Defender's Crest
+		- Pets
+			- AllPetsHelper - Modifies damage rate of Flukenest, Grimmchild, Glowing Womb, Weaversong and Flukenest + Defender's Crest
+			- Flukehelper - Modifies damage of Flukenest
+			- GrimmchildHelper - Modifies damage and attack speed of Grimmchild
+			- HatchlingHelper - Modifies damage of Glowing Womb
+			- WeaverlingHelper - Modifies damage of Weaversong
+		- Shroom
+			- SporeDamageHelper - Modifies damage rate of Spore SHroom
+			- SporeSizeHelper - Modifies size of Spore Shroom
+		- ElegyBeamAttacker - Adds a chance to trigger a Grubberfly's Elegy beam attack when swinging the nail
+		- GetModCharmHelper - Gets the numeric ID of a Mod-added charm by name
+	- Shields
+		- ShieldHelper - Template for adding new damage-blocking abilities
+		- CarefreeHelper - Adds a second chance of Carefree Melody triggering
+	- CustomBuffHelper - Template for dynamically modifying a property
+	- GetEnemyHelper - Gets the nearest enemy
+	- SpriteHelper - Gets a sprite from embedded resources
+- Utilities - Various libraries for logic and calculations
+	- Calculations - Performs calculations such as converting damage values to other types
+	- ClassIntegrations - Accesses properties, fields and methods from other classes
+	- Logic - Determines logic results such as if an object is a nail attack or if the player can take damage
+	- NotchCosts - Calculates the value of various properties and modifiers in terms of charm notches
+	- PlayerValues - Gets properties related to the player, such as how much SOUL the player has collected

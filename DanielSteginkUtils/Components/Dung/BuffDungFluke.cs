@@ -1,6 +1,4 @@
-﻿using DanielSteginkUtils.Components.Template;
-
-namespace DanielSteginkUtils.Components.Dung
+﻿namespace DanielSteginkUtils.Components.Dung
 {
     /// <summary>
     /// Custom component for modifying the damage rate of clouds created by Dung Flukes

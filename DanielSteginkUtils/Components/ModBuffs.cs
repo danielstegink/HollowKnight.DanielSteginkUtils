@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace DanielSteginkUtils.Components.Template
+namespace DanielSteginkUtils.Components
 {
     /// <summary>
     /// Custom component for tracking which mods/features are applying a buff to a given game object

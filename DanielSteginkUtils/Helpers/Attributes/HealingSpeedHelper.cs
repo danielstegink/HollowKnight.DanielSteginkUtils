@@ -1,6 +1,6 @@
 ﻿using DanielSteginkUtils.Utilities;
 
-namespace DanielSteginkUtils.Helpers.Health
+namespace DanielSteginkUtils.Helpers.Attributes
 {
     /// <summary>
     /// Helper for adjusting the player's healing speed

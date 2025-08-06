@@ -1,5 +1,4 @@
-﻿using DanielSteginkUtils.Components.Template;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace DanielSteginkUtils.Components.Dung
 {
