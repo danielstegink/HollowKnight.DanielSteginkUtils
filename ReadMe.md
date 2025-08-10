@@ -40,6 +40,10 @@ General structure:
 		- Shroom
 			- SporeDamageHelper - Modifies damage rate of Spore SHroom
 			- SporeSizeHelper - Modifies size of Spore Shroom
+		- Templates
+			- TemplateCharm - Variation of SFCore's EasyCharm. Includes logic for adding the charm to the map for pickup
+			- ExaltedCharm - Variation of TemplateCharm that also includes logic for upgrading the charm via the Exaltation mod
+			- ExaltedCharmState - Variation of SFCore's EasyCharmState that also handles if a charm has been upgraded via Exaltation
 		- ElegyBeamAttacker - Adds a chance to trigger a Grubberfly's Elegy beam attack when swinging the nail
 		- GetModCharmHelper - Gets the numeric ID of a Mod-added charm by name
 	- Shields
@@ -59,6 +63,10 @@ General structure:
 Thank you to SFGrenade, Roma 337 and Spamtom F. Gambleton for testing and feedback.
 
 ## Patch Notes
+1.1.0.0
+- Added Charm templates using SFCore's EasyCharm as a base
+- Added a new modifier for Shape of Unn to NotchCosts
+
 1.0.1.0
 - Replaced references to PlayerData with calls to GetBool and GetInt
 - Simplified code in GetModCharmHelper

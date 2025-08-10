@@ -325,5 +325,18 @@
             // If we assume the effects are equal, that means 1 notch is worth a 35% boost in I-Frames.
             return stalwartShellModifier;
         }
+
+        /// <summary>
+        /// Flat multiplier in the cost of a property that only triggers during Shape of Unn
+        /// </summary>
+        /// <returns></returns>
+        public static float UnnModifier()
+        {
+            // For 1 notch, Sprintmaster increases movement speed by 20%
+            // However, it increases SOU's speed by 100%
+            // That means a property or modifier is 5x as valuable when it is only active during SOU,
+            // or 20% of its cost
+            return 0.2f;
+        }
     }
 }
