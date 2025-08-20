@@ -45,7 +45,7 @@ namespace DanielSteginkUtils.Helpers.Abilities
         /// <summary>
         /// Applies the modifiers to the cooldowns
         /// </summary>
-        public void Start()
+        public virtual void Start()
         {
             if (!isActive)
             {
@@ -67,7 +67,7 @@ namespace DanielSteginkUtils.Helpers.Abilities
         /// <summary>
         /// Resets the cooldowns
         /// </summary>
-        public void Stop()
+        public virtual void Stop()
         {
             if (isActive)
             {

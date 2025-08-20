@@ -40,6 +40,12 @@ namespace DanielSteginkUtils.Utilities
         /// <returns></returns>
         public static bool IsNailAttack(HitInstance hitInstance, bool allowNailArts = true, bool allowGrubberfly = true)
         {
+            // Possible glitch where the Source is null
+            if (hitInstance.Source == null)
+            {
+                return false;
+            }
+
             if (nailAttackNames.Contains(hitInstance.Source.name))
             {
                 return true;
@@ -58,6 +64,16 @@ namespace DanielSteginkUtils.Utilities
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Determines if an attack is a Nail Art
+        /// </summary>
+        /// <param name="objectName"></param>
+        /// <returns></returns>
+        public static bool IsNailArt(string objectName)
+        {
+            return nailArtNames.Contains(objectName);
         }
 
         /// <summary>

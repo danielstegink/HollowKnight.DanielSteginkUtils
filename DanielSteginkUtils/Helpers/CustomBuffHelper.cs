@@ -187,7 +187,7 @@ namespace DanielSteginkUtils.Helpers
         /// <param name="message"></param>
         private void Log(string message)
         {
-            Logging.Log("CustomBuffHelper", message);
+            Logging.Log($"{modName} - {featureName}", message);
         }
 
         /// <summary>

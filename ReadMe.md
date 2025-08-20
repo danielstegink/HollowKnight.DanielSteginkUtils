@@ -8,6 +8,8 @@ General structure:
 		- BuffDungDamage - Modifies damage rate of Defender's Crest
 		- BuffDungFluke - Modifies damage rate of Defender's Crest + Flukenest
 		- BuffDungSize - Modifies size of Defender's Crest
+	- Elegy
+		- BuffElegyRange - Modifies range of Grubberfly's Elegy
 	- Shroom
 		- BuffSporeDamage - Modifies damage rate of Spore SHroom
 		- BuffSporeSize - Modifies size of Spore Shroom
@@ -31,6 +33,9 @@ General structure:
 			- DungDamageHelper - Modifies damage rate of Defender's Crest
 			- DungFlukeHelper - Modifies damage rate of Defender's Crest + Flukenest
 			- DungSizeHelper - Modifies size of Defender's Crest
+		- Elegy
+			- ElegyBeamAttacker - Adds a chance to trigger a Grubberfly's Elegy beam attack when swinging the nail
+			- ElegyBeamRangeHelper - Modifies the range of Grubberfly's Elegy beam attacks
 		- Pets
 			- AllPetsHelper - Modifies damage rate of Flukenest, Grimmchild, Glowing Womb, Weaversong and Flukenest + Defender's Crest
 			- Flukehelper - Modifies damage of Flukenest
@@ -44,7 +49,6 @@ General structure:
 			- TemplateCharm - Variation of SFCore's EasyCharm. Includes logic for adding the charm to the map for pickup
 			- ExaltedCharm - Variation of TemplateCharm that also includes logic for upgrading the charm via the Exaltation mod
 			- ExaltedCharmState - Variation of SFCore's EasyCharmState that also handles if a charm has been upgraded via Exaltation
-		- ElegyBeamAttacker - Adds a chance to trigger a Grubberfly's Elegy beam attack when swinging the nail
 		- GetModCharmHelper - Gets the numeric ID of a Mod-added charm by name
 	- Shields
 		- ShieldHelper - Template for adding new damage-blocking abilities
@@ -63,6 +67,12 @@ General structure:
 Thank you to SFGrenade, Roma 337 and Spamtom F. Gambleton for testing and feedback.
 
 ## Patch Notes
+1.2.0.0
+- Added/sorted helpers for Grubberfly's Elegy
+- New logic for checking if an attack is a Nail Art
+- Bug fix for IsNailAttack
+- Modified load priority so this library loads before most mods
+
 1.1.0.0
 - Added Charm templates using SFCore's EasyCharm as a base
 - Added a new modifier for Shape of Unn to NotchCosts

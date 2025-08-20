@@ -3,7 +3,7 @@ using GlobalEnums;
 using System;
 using UnityEngine;
 
-namespace DanielSteginkUtils.Helpers.Charms
+namespace DanielSteginkUtils.Helpers.Charms.Elegy
 {
     /// <summary>
     /// Helper for firing a Grubberfly's Elegy beam attack

@@ -7,8 +7,6 @@ using SFCore;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using static Platform;
-using static SFCore.ItemHelper;
 
 namespace DanielSteginkUtils.Helpers.Charms.Templates
 {
