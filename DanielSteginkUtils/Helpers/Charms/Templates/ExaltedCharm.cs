@@ -17,7 +17,7 @@ namespace DanielSteginkUtils.Helpers.Charms.Templates
         /// <param name="addToMap"></param>
         public ExaltedCharm(string modName, bool addToMap) : base(modName, addToMap)
         {
-            On.CharmIconList.GetSprite += GetIcon;
+            On.CharmIconList.GetSprite += GetExaltedIcon;
             ModHooks.SavegameSaveHook += Upgrade;
         }
 
@@ -77,42 +77,6 @@ namespace DanielSteginkUtils.Helpers.Charms.Templates
         }
         #endregion
 
-        #region Icon
-        /// <summary>
-        /// Icon of the regular charm
-        /// </summary>
-        public abstract Sprite icon { get; }
-
-        /// <summary>
-        /// Icon of the exalted charm
-        /// </summary>
-        public abstract Sprite exaltedIcon { get; }
-
-        /// <summary>
-        /// Overrides the default GetSprite so that the Exalted Icon can be displayed instead
-        /// </summary>
-        /// <param name="orig"></param>
-        /// <param name="self"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public virtual Sprite GetIcon(On.CharmIconList.orig_GetSprite orig, CharmIconList self, int id)
-        {
-            if (id == Id)
-            {
-                if (!IsUpgraded)
-                {
-                    return icon;
-                }
-                else
-                {
-                    return exaltedIcon;
-                }
-            }
-
-            return orig(self, id);
-        }
-        #endregion
-
         #region Cost
         /// <summary>
         /// Cost of the regular charm
@@ -151,6 +115,31 @@ namespace DanielSteginkUtils.Helpers.Charms.Templates
         }
 
         #region Exaltation
+        /// <summary>
+        /// Icon of the exalted charm
+        /// </summary>
+        public abstract Sprite exaltedIcon { get; }
+
+        /// <summary>
+        /// Overrides the default GetSprite so that the Exalted Icon can be displayed instead
+        /// </summary>
+        /// <param name="orig"></param>
+        /// <param name="self"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public virtual Sprite GetExaltedIcon(On.CharmIconList.orig_GetSprite orig, CharmIconList self, int id)
+        {
+            if (id == Id)
+            {
+                if (IsUpgraded)
+                {
+                    return exaltedIcon;
+                }
+            }
+
+            return orig(self, id);
+        }
+
         /// <summary>
         /// Tracks if the charm has been upgraded
         /// </summary>

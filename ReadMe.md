@@ -64,9 +64,12 @@ General structure:
 	- PlayerValues - Gets properties related to the player, such as how much SOUL the player has collected
 
 ## Thanks
-Thank you to SFGrenade, Roma 337 and Spamtom F. Gambleton for testing and feedback.
+Thank you to SFGrenade, Roma 337, Volt and Spamtom F. Gambleton for testing and feedback.
 
 ## Patch Notes
+1.2.1.0
+- Icon bug fix for ExaltedCharm
+
 1.2.0.0
 - Added/sorted helpers for Grubberfly's Elegy
 - New logic for checking if an attack is a Nail Art
