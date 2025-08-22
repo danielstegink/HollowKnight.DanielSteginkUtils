@@ -38,6 +38,8 @@ namespace DanielSteginkUtils.Helpers.Charms.Templates
         /// <param name="addToMap"></param>
         private void AddToItemChanger(string modName, bool addToMap)
         {
+            ItemChangerMod.CreateSettingsProfile(false, false);
+
             // Add the charm and its location to ItemChanger for placement
             ItemChanger.Items.CharmItem item = new ItemChanger.Items.CharmItem()
             {
@@ -92,7 +94,6 @@ namespace DanielSteginkUtils.Helpers.Charms.Templates
         /// <exception cref="NotImplementedException"></exception>
         private void AddToMap(On.GameManager.orig_EnterHero orig, GameManager self, bool additiveGateSearch)
         {
-            ItemChangerMod.CreateSettingsProfile(false, false);
             AbstractLocation location = Finder.GetLocation(GetItemChangerId());
             AbstractPlacement placement = location.Wrap();
             placement.Add(Finder.GetItem(GetItemChangerId()));

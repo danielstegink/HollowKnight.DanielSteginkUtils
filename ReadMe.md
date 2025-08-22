@@ -67,6 +67,9 @@ General structure:
 Thank you to SFGrenade, Roma 337, Volt and Spamtom F. Gambleton for testing and feedback.
 
 ## Patch Notes
+1.2.1.1
+- Icon bug fix v2
+
 1.2.1.0
 - Icon bug fix for ExaltedCharm
 
