@@ -69,7 +69,6 @@ namespace DanielSteginkUtils.Helpers.Charms.Pets
 
             orig(self);
 
-            // Reset damage afterwards; Weaverling FSMs don't reset like Grimmballs
             if (baseDamage > 0)
             {
                 self.Fsm.GetFsmInt("Damage").Value = baseDamage;

@@ -1,4 +1,4 @@
-﻿using DanielSteginkUtils.Components.Dung;
+﻿using DanielSteginkUtils.Components;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,7 +9,7 @@ namespace DanielSteginkUtils.Helpers.Charms.Shroom
     /// Spore Shroom clouds, like Dung clouds, are recycled in a confusing way so that 
     /// buffing a cloud only once is tricky. So here we 
     /// </summary>
-    public class SporeDamageHelper : CustomBuffHelper<BuffDungDamage, float>
+    public class SporeDamageHelper : CustomBuffHelper<BuffSporeDamage, float>
     {
         /// <summary>
         /// Helper for adjusting the damage of clouds created by Spore Shroom
@@ -48,7 +48,7 @@ namespace DanielSteginkUtils.Helpers.Charms.Shroom
         /// </summary>
         /// <param name="gameObject"></param>
         /// <param name="modsApplied"></param>
-        public override void ApplyBuff(GameObject gameObject, BuffDungDamage modsApplied)
+        public override void ApplyBuff(GameObject gameObject, BuffSporeDamage modsApplied)
         {
             DamageEffectTicker damageEffectTicker = gameObject.GetComponent<DamageEffectTicker>();
             damageEffectTicker.SetDamageInterval(modsApplied.GetModdedValue());

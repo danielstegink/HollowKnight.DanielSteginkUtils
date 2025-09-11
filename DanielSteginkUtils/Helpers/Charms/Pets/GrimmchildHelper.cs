@@ -60,17 +60,6 @@ namespace DanielSteginkUtils.Helpers.Charms.Pets
         }
 
         /// <summary>
-        /// Stores the damage states of the Grimmchild FSM
-        /// </summary>
-        private string[] damageStates = new string[]
-        {
-            "Level 2",
-            "Level 3",
-            "Level 4"
-        };
-
-
-        /// <summary>
         /// Grimmballs store their damage in an Enemy Damager object which has an Attack FSM that directly subtracts from enemy HP
         /// </summary>
         /// <param name="orig"></param>
@@ -93,7 +82,7 @@ namespace DanielSteginkUtils.Helpers.Charms.Pets
 
             orig(self);
 
-            // Reset damage afterwards; Weaverling FSMs don't reset like Grimmballs
+            // ALWAYS reset after modifying FSM values, otherwise they stack
             if (baseDamage > 0)
             {
                 self.Fsm.GetFsmInt("Damage").Value = baseDamage;
@@ -107,13 +96,14 @@ namespace DanielSteginkUtils.Helpers.Charms.Pets
         /// <param name="self"></param>
         private void BuffSpeed(On.HutongGames.PlayMaker.Actions.SetFloatValue.orig_OnEnter orig, SetFloatValue self)
         {
+            float baseValue = self.floatValue.Value;
+
             if (self.Fsm.GameObject.name.Equals("Grimmchild(Clone)") && 
                 self.Fsm.Name.Equals("Control") && 
                 (self.State.Name.Equals("Pause") || 
                     self.State.Name.Equals("Spawn")) &&
                 attackModifier != 1)
             {
-                float baseValue = self.floatValue.Value;
                 self.floatValue.Value *= attackModifier;
                 if (performLogging)
                 {
@@ -122,6 +112,8 @@ namespace DanielSteginkUtils.Helpers.Charms.Pets
             }
 
             orig(self);
+
+            self.floatValue.Value = baseValue;
         }
 
         /// <summary>
@@ -131,14 +123,14 @@ namespace DanielSteginkUtils.Helpers.Charms.Pets
         /// <param name="self"></param>
         private void BuffRandomSpeed(On.HutongGames.PlayMaker.Actions.RandomFloat.orig_OnEnter orig, RandomFloat self)
         {
+            float baseMinValue = self.min.Value;
+            float baseMaxValue = self.min.Value;
+
             if (self.Fsm.GameObject.name.Equals("Grimmchild(Clone)") &&
                 self.Fsm.Name.Equals("Control") && 
                 self.State.Name.Equals("Antic") &&
                 attackModifier != 1)
             {
-                float baseMinValue = self.min.Value;
-                float baseMaxValue = self.min.Value;
-
                 self.min.Value *= attackModifier;
                 self.max.Value *= attackModifier;
                 if (performLogging)
@@ -148,6 +140,8 @@ namespace DanielSteginkUtils.Helpers.Charms.Pets
             }
 
             orig(self);
+            self.min.Value = baseMinValue;
+            self.max.Value = baseMaxValue;
         }
     }
 }
