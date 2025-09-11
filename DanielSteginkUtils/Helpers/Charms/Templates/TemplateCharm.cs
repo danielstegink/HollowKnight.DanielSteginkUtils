@@ -137,6 +137,7 @@ namespace DanielSteginkUtils.Helpers.Charms.Templates
             mapModTag.Properties["PoolGroup"] = "Charms";
 
             Finder.DefineCustomItem(CharmItem);
+            //Logging.Log(ModName, "Charm added to ItemChanger");
         }
 
         /// <summary>
@@ -159,7 +160,7 @@ namespace DanielSteginkUtils.Helpers.Charms.Templates
                     placement.Add(CharmItem);
 
                     placement.Load();
-                    //Logging.Log(ModName, $"Charm added to map at {placement.Name}");
+                    //Logging.Log(ModName, "Charm added to map");
                 }
                 catch (Exception ex)
                 {
