@@ -67,6 +67,10 @@ General structure:
 Thank you to SFGrenade, Roma 337, Volt and Spamtom F. Gambleton for testing and feedback.
 
 ## Patch Notes
+1.2.2.0
+- Fix for DashHelper so it doesn't get overwritten by CharmChanger
+- Redid TemplateCharm to use ItemChanger
+
 1.2.1.2
 - Icon bug fix v3
 - Various small changes to helpers

@@ -22,11 +22,6 @@ namespace DanielSteginkUtils.Helpers.Abilities
         /// Whether or not to log changes
         /// </summary>
         public bool performLogging { get; set; } = true;
-
-        /// <summary>
-        /// Tracks if the buff has been applied
-        /// </summary>
-        private bool isActive { get; set; } = false;
         #endregion
 
         /// <summary>
@@ -47,21 +42,7 @@ namespace DanielSteginkUtils.Helpers.Abilities
         /// </summary>
         public virtual void Start()
         {
-            if (!isActive)
-            {
-                HeroController.instance.DASH_COOLDOWN *= dashModifier;
-                HeroController.instance.DASH_COOLDOWN_CH *= dashModifier;
-                HeroController.instance.SHADOW_DASH_COOLDOWN *= darkDashModifier;
-                isActive = true;
-
-                if (performLogging)
-                {
-                    Logging.Log("DashHelper", "Dash cooldowns reduced");
-                    Logging.Log("DashHelper", $"Dash cooldown: {HeroController.instance.DASH_COOLDOWN}");
-                    Logging.Log("DashHelper", $"Dashmaster cooldown: {HeroController.instance.DASH_COOLDOWN_CH}");
-                    Logging.Log("DashHelper", $"Shade Dash cooldown: {HeroController.instance.SHADOW_DASH_COOLDOWN}");
-                }
-            }
+            On.HeroController.HeroDash += BuffDashCooldowns;
         }
 
         /// <summary>
@@ -69,19 +50,36 @@ namespace DanielSteginkUtils.Helpers.Abilities
         /// </summary>
         public virtual void Stop()
         {
-            if (isActive)
-            {
-                HeroController.instance.DASH_COOLDOWN /= dashModifier;
-                HeroController.instance.DASH_COOLDOWN_CH /= dashModifier;
-                HeroController.instance.SHADOW_DASH_COOLDOWN /= darkDashModifier;
-                isActive = false;
+            On.HeroController.HeroDash -= BuffDashCooldowns;
+        }
 
+        /// <summary>
+        /// Various mods (most famously Charm Changer) overwrite the dash cooldowns manually,
+        /// so in order to modify those values short of overwriting them, we have to modify 
+        /// the timer those values are used for directly
+        /// </summary>
+        /// <param name="orig"></param>
+        /// <param name="self"></param>
+        private void BuffDashCooldowns(On.HeroController.orig_HeroDash orig, HeroController self)
+        {
+            // Let the controller do its thing so Charm Changer takes effect and we don't get overwritten
+            orig(self);
+
+            float dashCooldown = ClassIntegrations.GetField<HeroController, float>(self, "dashCooldownTimer");
+            float shadowCooldown = ClassIntegrations.GetField<HeroController, float>(self, "shadowDashTimer");
+
+            ClassIntegrations.SetField(self, "dashCooldownTimer", dashCooldown * dashModifier);
+            if (performLogging)
+            {
+                Logging.Log("DashHelper", $"Dash cooldown: {dashCooldown} -> {dashCooldown * dashModifier}");
+            }
+
+            if (self.cState.shadowDashing)
+            {
+                ClassIntegrations.SetField(self, "shadowDashTimer", shadowCooldown * darkDashModifier);
                 if (performLogging)
                 {
-                    Logging.Log("DashHelper", "Dash cooldowns reset");
-                    Logging.Log("DashHelper", $"Dash cooldown: {HeroController.instance.DASH_COOLDOWN}");
-                    Logging.Log("DashHelper", $"Dashmaster cooldown: {HeroController.instance.DASH_COOLDOWN_CH}");
-                    Logging.Log("DashHelper", $"Shade Dash cooldown: {HeroController.instance.SHADOW_DASH_COOLDOWN}");
+                    Logging.Log("DashHelper", $"Shade Dash cooldown: {shadowCooldown} -> {shadowCooldown * darkDashModifier}");
                 }
             }
         }

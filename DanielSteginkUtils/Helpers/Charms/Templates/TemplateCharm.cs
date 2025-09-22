@@ -5,12 +5,15 @@ using ItemChanger.UIDefs;
 using Modding;
 using SFCore;
 using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace DanielSteginkUtils.Helpers.Charms.Templates
 {
     /// <summary>
-    /// Template class for upgradeable custom charms based on SFCore's EasyCharm
+    /// Template class for upgradeable custom charms based on SFCore's EasyCharm.
+    /// 
+    /// WARNING - Uses ItemChanger to add charms to the map, so making a new save will be required.
     /// </summary>
     public abstract class TemplateCharm : EasyCharm
     {
@@ -20,16 +23,6 @@ namespace DanielSteginkUtils.Helpers.Charms.Templates
         private string ModName { get; set; }
 
         /// <summary>
-        /// Stores if the charm should be added to the map as a pickup item
-        /// </summary>
-        private bool AddToMap { get; set; }
-
-        /// <summary>
-        /// Stores ItemChanger's placeholder item
-        /// </summary>
-        private ItemChanger.Items.CharmItem CharmItem { get; set; }
-
-        /// <summary>
         /// Template class for custom charms based on SFCore's EasyCharm
         /// </summary>
         /// <param name="modName"></param>
@@ -37,12 +30,16 @@ namespace DanielSteginkUtils.Helpers.Charms.Templates
         public TemplateCharm(string modName, bool addToMap) : base()
         {
             ModName = modName;
-            AddToMap = addToMap;
-            AddCharmToItemChanger();
             Logging.Log(ModName, $"Charm added under the numeric ID {Id}");
 
             ModHooks.SetPlayerBoolHook += CheckEquipped;
             On.HeroController.Start += OnPlayerDataLoaded;
+
+            if (addToMap)
+            {
+                AddCharmToItemChanger();
+                On.UIManager.StartNewGame += NewGame;
+            }
         }
 
         #region Activation
@@ -87,8 +84,6 @@ namespace DanielSteginkUtils.Helpers.Charms.Templates
             {
                 Equip();
             }
-
-            AddCharmToMap();
         }
 
         /// <summary>
@@ -117,9 +112,7 @@ namespace DanielSteginkUtils.Helpers.Charms.Templates
         /// </summary>
         internal void AddCharmToItemChanger()
         {
-            ItemChangerMod.CreateSettingsProfile(false, false);
-
-            CharmItem = new ItemChanger.Items.CharmItem()
+            var charmItem = new ItemChanger.Items.CharmItem()
             {
                 charmNum = Id,
                 name = GetItemChangerId(),
@@ -131,12 +124,13 @@ namespace DanielSteginkUtils.Helpers.Charms.Templates
                 }
             };
 
-            var mapModTag = CharmItem.AddTag<InteropTag>();
+            var mapModTag = charmItem.AddTag<InteropTag>();
             mapModTag.Message = "RandoSupplementalMetadata";
             mapModTag.Properties["ModSource"] = ModName;
             mapModTag.Properties["PoolGroup"] = "Charms";
 
-            Finder.DefineCustomItem(CharmItem);
+            Finder.DefineCustomItem(charmItem);
+            Finder.DefineCustomLocation(ItemChangerLocation());
             //Logging.Log(ModName, "Charm added to ItemChanger");
         }
 
@@ -146,26 +140,29 @@ namespace DanielSteginkUtils.Helpers.Charms.Templates
         /// <returns></returns>
         public abstract AbstractLocation ItemChangerLocation();
 
-        /// <summary>
-        /// Adds charm to map so it can be picked up
-        /// </summary>
-        private void AddCharmToMap()
+        private void NewGame(On.UIManager.orig_StartNewGame orig, UIManager self, bool permaDeath, bool bossRush)
         {
-            if (AddToMap && !GotCharm)
-            {
-                try
-                {
-                    AbstractLocation location = ItemChangerLocation();
-                    AbstractPlacement placement = location.Wrap();
-                    placement.Add(CharmItem);
+            PlaceCharms();
+            orig(self, permaDeath, bossRush);
+        }
 
-                    placement.Load();
-                    //Logging.Log(ModName, "Charm added to map");
-                }
-                catch (Exception ex)
-                {
-                    Logging.Log(ModName, $"Error while adding charm to map: \n{ex}");
-                }
+        /// <summary>
+        /// Gets charms from ItemChanger and places them on the map
+        /// </summary>
+        public void PlaceCharms()
+        {
+            if (!GotCharm)
+            {
+                ItemChangerMod.CreateSettingsProfile(false, false);
+                List<AbstractPlacement> placements = new List<AbstractPlacement>();
+
+                AbstractLocation location = Finder.GetLocation(GetItemChangerId());
+                AbstractPlacement placement = location.Wrap();
+                AbstractItem item = Finder.GetItem(GetItemChangerId());
+                placement.Add(item);
+
+                placements.Add(placement);
+                ItemChangerMod.AddPlacements(placements, PlacementConflictResolution.Replace);
             }
         }
         #endregion
