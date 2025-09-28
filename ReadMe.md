@@ -8,8 +8,6 @@ General structure:
 		- BuffDungDamage - Modifies damage rate of Defender's Crest
 		- BuffDungFluke - Modifies damage rate of Defender's Crest + Flukenest
 		- BuffDungSize - Modifies size of Defender's Crest
-	- Elegy
-		- BuffElegyRange - Modifies range of Grubberfly's Elegy
 	- Shroom
 		- BuffSporeDamage - Modifies damage rate of Spore SHroom
 		- BuffSporeSize - Modifies size of Spore Shroom
@@ -24,6 +22,7 @@ General structure:
 		- GeoHelper - Modifies Geo gained from all sources
 		- HealHelper - Adds a chance to get an additional Mask when healing
 		- HealingSpeedHelper - Modifies the time required to heal
+		- NailArtRangeHelper - Modifies the range of Nail Arts
 		- NailRangeHelper - Modifies the range of nail attacks
 		- SoulHelper - Gives extra SOUL to the player without triggering related events
 		- SpeedHelper - Modifies movement speed
@@ -67,6 +66,11 @@ General structure:
 Thank you to SFGrenade, Roma 337, Volt and Spamtom F. Gambleton for testing and feedback.
 
 ## Patch Notes
+1.3.0.0
+- Modified DashHelper to use HKMirror's HeroControllerR
+- Fixed Readme
+- Reworked NailArtRangeHelper and ElegyBeamRangeHelper
+
 1.2.2.0
 - Fix for DashHelper so it doesn't get overwritten by CharmChanger
 - Redid TemplateCharm to use ItemChanger

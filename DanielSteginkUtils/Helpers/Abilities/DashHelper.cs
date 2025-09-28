@@ -1,4 +1,5 @@
 ﻿using DanielSteginkUtils.Utilities;
+using HKMirror.Reflection.SingletonClasses;
 
 namespace DanielSteginkUtils.Helpers.Abilities
 {
@@ -65,21 +66,21 @@ namespace DanielSteginkUtils.Helpers.Abilities
             // Let the controller do its thing so Charm Changer takes effect and we don't get overwritten
             orig(self);
 
-            float dashCooldown = ClassIntegrations.GetField<HeroController, float>(self, "dashCooldownTimer");
-            float shadowCooldown = ClassIntegrations.GetField<HeroController, float>(self, "shadowDashTimer");
+            float dashCooldown = HeroControllerR.dashCooldownTimer;
+            float shadowCooldown = HeroControllerR.shadowDashTimer;
 
-            ClassIntegrations.SetField(self, "dashCooldownTimer", dashCooldown * dashModifier);
+            HeroControllerR.dashCooldownTimer *= dashModifier;
             if (performLogging)
             {
-                Logging.Log("DashHelper", $"Dash cooldown: {dashCooldown} -> {dashCooldown * dashModifier}");
+                Logging.Log("DashHelper", $"Dash cooldown: {dashCooldown} -> {HeroControllerR.dashCooldownTimer}");
             }
 
             if (self.cState.shadowDashing)
             {
-                ClassIntegrations.SetField(self, "shadowDashTimer", shadowCooldown * darkDashModifier);
+                HeroControllerR.shadowDashTimer *= darkDashModifier;
                 if (performLogging)
                 {
-                    Logging.Log("DashHelper", $"Shade Dash cooldown: {shadowCooldown} -> {shadowCooldown * darkDashModifier}");
+                    Logging.Log("DashHelper", $"Shade Dash cooldown: {shadowCooldown} -> {HeroControllerR.shadowDashTimer}");
                 }
             }
         }
