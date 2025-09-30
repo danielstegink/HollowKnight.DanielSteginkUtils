@@ -68,7 +68,7 @@ namespace DanielSteginkUtils.Helpers.Charms.Pets
         public void Stop()
         {
             grimmHelper.Stop();
-            hatchlingHelper.Start();
+            hatchlingHelper.Stop();
             weaverHelper.Stop();
             flukeHelper.Stop();
             dungFlukeHelper.Stop();
