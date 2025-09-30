@@ -63,7 +63,7 @@ General structure:
 	- PlayerValues - Gets properties related to the player, such as how much SOUL the player has collected
 
 ## Thanks
-Thank you to SFGrenade, Roma 337, Volt and Spamtom F. Gambleton for testing and feedback.
+Thank you to SFGrenade, Roma 337, Volt, hannes-j and Spamtom F. Gambleton for testing and feedback.
 
 ## Patch Notes
 1.3.1.0
