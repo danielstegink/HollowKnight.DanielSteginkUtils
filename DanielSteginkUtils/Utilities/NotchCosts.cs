@@ -204,7 +204,7 @@
             float kingsoulTime = 2f / 4f;
 
             // So for 1 notch, the player should get 0.4 SOUL per second, or 1 SOUL every 2.5 seconds
-            return kingsoulTime / 5;
+            return kingsoulTime * 5;
         }
         #endregion
 

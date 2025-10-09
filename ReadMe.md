@@ -66,6 +66,9 @@ General structure:
 Thank you to SFGrenade, Roma 337, Volt, hannes-j and Spamtom F. Gambleton for testing and feedback.
 
 ## Patch Notes
+1.3.2.0
+- Bug fix for PassiveSoulTime
+
 1.3.1.0
 - Bug fix for AllPetsHelper
 
