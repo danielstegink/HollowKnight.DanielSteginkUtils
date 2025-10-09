@@ -68,6 +68,9 @@ General structure:
 Thank you to SFGrenade, Roma 337, Volt, hannes-j and Spamtom F. Gambleton for testing and feedback.
 
 ## Patch Notes
+1.4.1.0
+- Bug fix for NailArtRangeHelper
+
 1.4.0.0
 - Added AspidAspectHelper and integrated it into AllPetsHelper
 - Bug fix for PassiveSoulTime

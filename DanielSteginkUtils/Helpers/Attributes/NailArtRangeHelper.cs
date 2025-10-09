@@ -30,6 +30,11 @@ namespace DanielSteginkUtils.Helpers.Attributes
         /// Whether or not to log results
         /// </summary>
         public bool performLogging { get; set; } = false;
+
+        /// <summary>
+        /// Tracks if the buff has been applied
+        /// </summary>
+        private bool buffApplied { get; set; } = false;
         #endregion
 
         /// <summary>
@@ -98,21 +103,29 @@ namespace DanielSteginkUtils.Helpers.Attributes
                     "G Slash",
                     "Dash Slash",
                 };
-                if (stateNames.Contains(self.Name))
+                if (stateNames.Contains(self.Name) && 
+                    !buffApplied)
                 {
                     foreach (string name in objectNames)
                     {
                         ApplyBuff(self, name, true);
                     }
+
+                    buffApplied = true;
                 }
 
                 // If we enter the "reset to normal" step, remove the buff
-                if (self.Name.Equals("Regain Control"))
+                // We also need to reset if the animation has been canceled, such as when damage is taken
+                if (buffApplied && 
+                    (self.Name.Equals("Regain Control") ||
+                        self.Name.Equals("Cancel All")))
                 {
                     foreach (string name in objectNames)
                     {
                         ApplyBuff(self, name, false);
                     }
+
+                    buffApplied = false;
                 }
             }
         }
@@ -125,19 +138,23 @@ namespace DanielSteginkUtils.Helpers.Attributes
         /// <param name="applyBuff"></param>
         private void ApplyBuff(HutongGames.PlayMaker.FsmState self, string nailArtName, bool applyBuff)
         {
+            GameObject gameObject = self.Fsm.Variables.GetFsmGameObject(nailArtName).Value;
+
             if (applyBuff)
             {
                 self.Fsm.Variables.GetFsmGameObject(nailArtName).Value.transform.localScale *= modifier;
+                if (performLogging)
+                {
+                    Log($"Game object {gameObject.name} buffed by {modifier} to {gameObject.transform.localScale}");
+                }
             }
             else
             {
                 self.Fsm.Variables.GetFsmGameObject(nailArtName).Value.transform.localScale /= modifier;
-            }
-
-            if (performLogging)
-            {
-                GameObject gameObject = self.Fsm.Variables.GetFsmGameObject(nailArtName).Value;
-                Log($"Game object {gameObject.name} adjusted by {modifier} to {gameObject.transform.localScale}");
+                if (performLogging)
+                {
+                    Log($"Game object {gameObject.name} reset by {modifier} to {gameObject.transform.localScale}");
+                }
             }
         }
     }
