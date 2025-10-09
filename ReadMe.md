@@ -11,6 +11,7 @@ General structure:
 	- Shroom
 		- BuffSporeDamage - Modifies damage rate of Spore SHroom
 		- BuffSporeSize - Modifies size of Spore Shroom
+	- BuffAspidAspect - Modifies damage of Aspid Aspect
 	- ExtraJumps - Modifies number of jumps received from Monarch Wings
 	- ModBuffs - Template for custom components
 - Helpers - Helper objects for modifying various properties
@@ -36,7 +37,8 @@ General structure:
 			- ElegyBeamAttacker - Adds a chance to trigger a Grubberfly's Elegy beam attack when swinging the nail
 			- ElegyBeamRangeHelper - Modifies the range of Grubberfly's Elegy beam attacks
 		- Pets
-			- AllPetsHelper - Modifies damage rate of Flukenest, Grimmchild, Glowing Womb, Weaversong and Flukenest + Defender's Crest
+			- AllPetsHelper - Modifies damage rate of Flukenest, Grimmchild, Glowing Womb, Weaversong, Aspid Aspect and Flukenest + Defender's Crest
+			- AspidAspectHelper - Modifies damage of Aspid Aspect
 			- Flukehelper - Modifies damage of Flukenest
 			- GrimmchildHelper - Modifies damage and attack speed of Grimmchild
 			- HatchlingHelper - Modifies damage of Glowing Womb
@@ -66,7 +68,8 @@ General structure:
 Thank you to SFGrenade, Roma 337, Volt, hannes-j and Spamtom F. Gambleton for testing and feedback.
 
 ## Patch Notes
-1.3.2.0
+1.4.0.0
+- Added AspidAspectHelper and integrated it into AllPetsHelper
 - Bug fix for PassiveSoulTime
 
 1.3.1.0

@@ -32,6 +32,11 @@ namespace DanielSteginkUtils.Helpers.Charms.Pets
         /// Flukenest + Dung Defender Utils
         /// </summary>
         private DungFlukeHelper dungFlukeHelper;
+
+        /// <summary>
+        /// Aspid Aspect Utils
+        /// </summary>
+        private AspidAspectHelper aspidAspectHelper;
         #endregion
 
         /// <summary>
@@ -48,6 +53,7 @@ namespace DanielSteginkUtils.Helpers.Charms.Pets
             weaverHelper = new WeaverlingHelper(damageModifier, performLogging);
             flukeHelper = new FlukeHelper(damageModifier, performLogging);
             dungFlukeHelper = new DungFlukeHelper(modName, featureName, 1 / damageModifier, performLogging);
+            aspidAspectHelper = new AspidAspectHelper(modName, featureName, damageModifier, performLogging);
         }
 
         /// <summary>
@@ -60,6 +66,7 @@ namespace DanielSteginkUtils.Helpers.Charms.Pets
             weaverHelper.Start();
             flukeHelper.Start();
             dungFlukeHelper.Start();
+            aspidAspectHelper.Start();
         }
 
         /// <summary>
@@ -72,6 +79,7 @@ namespace DanielSteginkUtils.Helpers.Charms.Pets
             weaverHelper.Stop();
             flukeHelper.Stop();
             dungFlukeHelper.Stop();
+            aspidAspectHelper.Stop();
         }
     }
 }

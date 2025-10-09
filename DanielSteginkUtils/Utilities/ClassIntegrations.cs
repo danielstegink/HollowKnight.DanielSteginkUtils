@@ -61,6 +61,23 @@ namespace DanielSteginkUtils.Utilities
         }
 
         /// <summary>
+        /// Sets the value of a property from the given input class.
+        /// </summary>
+        /// <typeparam name="I"></typeparam>
+        /// <param name="input"></param>
+        /// <param name="fieldName"></param>
+        /// <param name="value"></param>
+        /// <param name="flags"></param>
+        /// <returns></returns>
+        public static void SetProperty<I>(I input, string fieldName, object value,
+                                        BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static)
+        {
+            PropertyInfo propertyInfo = input.GetType()
+                                                .GetProperty(fieldName, flags);
+            propertyInfo.SetValue(input, value);
+        }
+
+        /// <summary>
         /// Calls a function from the given input class
         /// </summary>
         /// <typeparam name="I"></typeparam>
