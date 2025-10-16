@@ -66,26 +66,26 @@ namespace DanielSteginkUtils.Helpers.Charms.Pets
         /// <param name="self"></param>
         private void BuffDamage(On.HutongGames.PlayMaker.Actions.IntOperator.orig_OnEnter orig, HutongGames.PlayMaker.Actions.IntOperator self)
         {
-            int baseDamage = 0;
             if (self.Fsm.Name.Equals("Attack") &&
                 self.Fsm.GameObject.name.Equals("Enemy Damager") &&
                 self.Fsm.GameObject.transform.parent.gameObject.name.Contains("Grimmball") &&
                 self.State.Name.Equals("Hit"))
             {
-                baseDamage = self.Fsm.GetFsmInt("Damage").Value;
+                int baseDamage = self.Fsm.GetFsmInt("Damage").Value;
                 self.Fsm.GetFsmInt("Damage").Value = Calculations.GetModdedInt(baseDamage, damageModifier);
                 if (performLogging)
                 {
                     Logging.Log("GrimmchildHelper", $"Grimmchild damage increased from {baseDamage} to {self.Fsm.GetFsmInt("Damage").Value}");
                 }
-            }
 
-            orig(self);
+                orig(self);
 
-            // ALWAYS reset after modifying FSM values, otherwise they stack
-            if (baseDamage > 0)
-            {
+                // ALWAYS reset after modifying FSM values, otherwise they stack
                 self.Fsm.GetFsmInt("Damage").Value = baseDamage;
+            }
+            else
+            {
+                orig(self);
             }
         }
 
@@ -96,24 +96,27 @@ namespace DanielSteginkUtils.Helpers.Charms.Pets
         /// <param name="self"></param>
         private void BuffSpeed(On.HutongGames.PlayMaker.Actions.SetFloatValue.orig_OnEnter orig, SetFloatValue self)
         {
-            float baseValue = self.floatValue.Value;
-
             if (self.Fsm.GameObject.name.Equals("Grimmchild(Clone)") && 
                 self.Fsm.Name.Equals("Control") && 
                 (self.State.Name.Equals("Pause") || 
                     self.State.Name.Equals("Spawn")) &&
                 attackModifier != 1)
             {
+                float baseValue = self.floatValue.Value;
+
                 self.floatValue.Value *= attackModifier;
                 if (performLogging)
                 {
                     Logging.Log("GrimmchildHelper", $"Attack speed reduced from {baseValue} to {self.floatValue.Value}");
                 }
+
+                orig(self);
+                self.floatValue.Value = baseValue;
             }
-
-            orig(self);
-
-            self.floatValue.Value = baseValue;
+            else
+            {
+                orig(self);
+            }
         }
 
         /// <summary>
@@ -123,25 +126,29 @@ namespace DanielSteginkUtils.Helpers.Charms.Pets
         /// <param name="self"></param>
         private void BuffRandomSpeed(On.HutongGames.PlayMaker.Actions.RandomFloat.orig_OnEnter orig, RandomFloat self)
         {
-            float baseMinValue = self.min.Value;
-            float baseMaxValue = self.min.Value;
-
             if (self.Fsm.GameObject.name.Equals("Grimmchild(Clone)") &&
                 self.Fsm.Name.Equals("Control") && 
                 self.State.Name.Equals("Antic") &&
                 attackModifier != 1)
             {
+                float baseMinValue = self.min.Value;
+                float baseMaxValue = self.min.Value;
+
                 self.min.Value *= attackModifier;
                 self.max.Value *= attackModifier;
                 if (performLogging)
                 {
                     Logging.Log("GrimmchildHelper", $"Random speed reduced from ({baseMinValue} - {baseMaxValue}) to ({self.min.Value} - {self.max.Value})");
                 }
-            }
 
-            orig(self);
-            self.min.Value = baseMinValue;
-            self.max.Value = baseMaxValue;
+                orig(self);
+                self.min.Value = baseMinValue;
+                self.max.Value = baseMaxValue;
+            }
+            else
+            {
+                orig(self);
+            }
         }
     }
 }

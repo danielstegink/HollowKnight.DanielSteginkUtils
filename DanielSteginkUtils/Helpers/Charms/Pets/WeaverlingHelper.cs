@@ -53,25 +53,24 @@ namespace DanielSteginkUtils.Helpers.Charms.Pets
         /// <param name="self"></param>
         private void BuffWeaverlings(On.HutongGames.PlayMaker.Actions.IntOperator.orig_OnEnter orig, HutongGames.PlayMaker.Actions.IntOperator self)
         {
-            int baseDamage = 0;
             if (self.Fsm.Name.Equals("Attack") &&
                 self.Fsm.GameObject.name.Equals("Enemy Damager") &&
                 self.Fsm.GameObject.transform.parent.gameObject.name.Contains("Weaverling") &&
                 self.State.Name.Equals("Hit"))
             {
-                baseDamage = self.Fsm.GetFsmInt("Damage").Value;
+                int baseDamage = self.Fsm.GetFsmInt("Damage").Value;
                 self.Fsm.GetFsmInt("Damage").Value = Calculations.GetModdedInt(baseDamage, damageModifier);
                 if (performLogging)
                 {
                     Logging.Log("WeaverlingHelper", $"Weaverling damage increased from {baseDamage} to {self.Fsm.GetFsmInt("Damage").Value}");
                 }
-            }
 
-            orig(self);
-
-            if (baseDamage > 0)
-            {
+                orig(self);
                 self.Fsm.GetFsmInt("Damage").Value = baseDamage;
+            }
+            else
+            {
+                orig(self);
             }
         }
     }

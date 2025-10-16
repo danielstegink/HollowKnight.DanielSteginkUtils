@@ -60,13 +60,13 @@ namespace DanielSteginkUtils.Helpers.Attributes
         /// <param name="self"></param>
         private void ExtraStagger(On.HutongGames.PlayMaker.Actions.IntCompare.orig_OnEnter orig, HutongGames.PlayMaker.Actions.IntCompare self)
         {
-            // Caches modified value for easy reset
-            int originalValue = self.integer2.Value;
-
             // Make sure this is a Stun FSM
             if (self.Fsm.Name.Equals("Stun") ||
                 self.Fsm.Name.Equals("Stun Control"))
             {
+                // Caches modified value for easy reset
+                int originalValue = self.integer2.Value;
+
                 // Make sure this is one of the stun check states
                 if (self.State.Name.Equals("Max Check") ||
                     self.State.Name.Equals("Continue Combo"))
@@ -95,15 +95,19 @@ namespace DanielSteginkUtils.Helpers.Attributes
                         Logging.Log("StaggerHelper", $"Combo stun reduced by {comboModifier} to {self.integer2.Value}");
                     }
                 }
+
+                orig(self);
+
+                // Reset the stun value so it doesn't stack
+                self.integer2.Value = originalValue;
+                if (performLogging)
+                {
+                    Logging.Log("StaggerHelper", $"Stun reset to {self.integer2.Value}");
+                }
             }
-
-            orig(self);
-
-            // Reset the stun value so it doesn't stack
-            self.integer2.Value = originalValue;
-            if (performLogging)
+            else
             {
-                Logging.Log("StaggerHelper", $"Stun reset to {self.integer2.Value}");
+                orig(self);
             }
         }
     }

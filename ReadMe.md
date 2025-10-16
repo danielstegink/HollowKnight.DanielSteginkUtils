@@ -68,6 +68,9 @@ General structure:
 Thank you to SFGrenade, Roma 337, Volt, hannes-j and Spamtom F. Gambleton for testing and feedback.
 
 ## Patch Notes
+1.4.2.0
+- Bug fix for FSM code to avoid the "loop count exceeded maximum" error
+
 1.4.1.0
 - Bug fix for NailArtRangeHelper
 

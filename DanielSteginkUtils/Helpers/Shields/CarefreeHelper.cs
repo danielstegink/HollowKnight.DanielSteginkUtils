@@ -13,7 +13,7 @@ namespace DanielSteginkUtils.Helpers.Shields
         /// <summary>
         /// Chance of the shield triggering during an attack
         /// </summary>
-        private int     shieldChance { get; set; } = 0;
+        private int shieldChance { get; set; } = 0;
 
         /// <summary>
         /// Whether or not to send logs
