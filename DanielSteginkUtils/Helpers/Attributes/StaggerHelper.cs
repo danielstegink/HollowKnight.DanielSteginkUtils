@@ -50,7 +50,7 @@ namespace DanielSteginkUtils.Helpers.Attributes
         /// </summary>
         public void Stop()
         {
-            On.HutongGames.PlayMaker.Actions.IntCompare.OnEnter += ExtraStagger;
+            On.HutongGames.PlayMaker.Actions.IntCompare.OnEnter -= ExtraStagger;
         }
 
         /// <summary>
