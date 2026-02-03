@@ -19,7 +19,7 @@ namespace DanielSteginkUtils
         /// Hopefully this number doesn't change too often.
         /// </summary>
         /// <returns></returns>
-        public override string GetVersion() => "1.4.2.1";
+        public override string GetVersion() => "1.5.0.0";
 
         /// <summary>
         /// As a code library, we want this to load in before other mods do

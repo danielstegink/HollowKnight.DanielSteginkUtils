@@ -68,6 +68,9 @@ General structure:
 Thank you to SFGrenade, Roma 337, Volt, hannes-j, YuliaS11 and Spamtom F. Gambleton for testing and feedback.
 
 ## Patch Notes
+1.5.0.0
+- New methods added to NotchCosts and PlayerValues
+
 1.4.2.1
 - Bug fix for StaggerHelper to prevent stacking
 

@@ -59,6 +59,20 @@
             // So 1 Lifeblood mask is worth 0.75 notches
             return 3f / 4f;
         }
+
+        /// <summary>
+        /// The length of time (in seconds) it should take to regenerate 1 Mask for 1 notch
+        /// </summary>
+        /// <returns></returns>
+        public static float PassiveHealTime()
+        {
+            // Hiveblood regenerates 1 mask every 10 seconds for 4 notches
+            float secondsPerMask = 10f;
+            float secondsPerMaskPerNotch = secondsPerMask * 4;
+
+            // So for 1 notch, we should take 40 seconds to regenerate a mask
+            return secondsPerMaskPerNotch;
+        }
         #endregion
 
         #region Damage

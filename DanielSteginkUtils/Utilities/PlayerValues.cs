@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace DanielSteginkUtils.Utilities
 {
@@ -77,6 +78,88 @@ namespace DanielSteginkUtils.Utilities
                     PlayerData.instance.GetBool("mapOutskirts") &&
                     PlayerData.instance.GetBool("mapRestingGrounds") &&
                     PlayerData.instance.GetBool("mapAbyss");
+        }
+
+        /// <summary>
+        /// Gets the number of Mask shards collected
+        /// </summary>
+        /// <returns></returns>
+        public static int MaskShardsFound()
+        {
+            int shards = 0;
+
+            // 4 are bought from Sly
+            if (PlayerData.instance.slyShellFrag1)
+            {
+                shards++;
+            }
+
+            if (PlayerData.instance.slyShellFrag2)
+            {
+                shards++;
+            }
+
+            if (PlayerData.instance.slyShellFrag3)
+            {
+                shards++;
+            }
+
+            if (PlayerData.instance.slyShellFrag4)
+            {
+                shards++;
+            }
+
+            // 1 is reward by the Seer
+            if (PlayerData.instance.dreamReward7)
+            {
+                shards++;
+            }
+
+            // 11 are found in the wild
+            shards += SceneData.instance.persistentBoolItems
+                                        .Where(x => x.id.Equals("Heart Piece"))
+                                        .Count();
+
+            return shards;
+        }
+
+        /// <summary>
+        /// Gets the number of Vessel Fragments found
+        /// </summary>
+        /// <returns></returns>
+        public static int VesselFragmentsFound()
+        {
+            int fragments = 0;
+
+            // 2 are bought from Sly
+            if (PlayerData.instance.slyVesselFrag1)
+            {
+                fragments++;
+            }
+
+            if (PlayerData.instance.slyVesselFrag2)
+            {
+                fragments++;
+            }
+
+            // 1 is given by the Seer
+            if (PlayerData.instance.dreamReward5)
+            {
+                fragments++;
+            }
+
+            // 1 is found in the Stag Nest
+            if (PlayerData.instance.vesselFragStagNest)
+            {
+                fragments++;
+            }
+
+            // 5 are found in the wild
+            fragments += SceneData.instance.persistentBoolItems
+                                        .Where(x => x.id.Equals("Vessel Fragment"))
+                                        .Count();
+
+            return fragments;
         }
     }
 }
