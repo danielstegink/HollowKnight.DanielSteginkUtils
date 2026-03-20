@@ -57,7 +57,7 @@ namespace DanielSteginkUtils.Components
 
             // Double jump has a number of factors it checks to see if the player can double-jump
             // The only one we really overwrite is whether they've double-jumped
-            ActorStates[] landedStates = new ActorStates[] { ActorStates.no_input, ActorStates.hard_landing, ActorStates.dash_landing };
+            ActorStates[] landedStates = new ActorStates[] { ActorStates.no_input, ActorStates.hard_landing };
             bool inAir = !self.inAcid &&
                             !self.cState.dashing &&
                             !self.cState.wallSliding &&
